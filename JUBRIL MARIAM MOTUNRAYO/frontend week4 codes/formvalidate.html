@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { max-width: 300px; margin: auto; }
+        input { display: block; width: 100%; margin: 5px 0; padding: 8px; }
+        .error { color: red; font-size: 12px; }
+        .success { color: green; }
+        h1{text-align: center;}
+        .all{width:50%;box-shadow:0 0 10px 5px; margin:0px auto;padding:10px 3px;}
+    </style>
+</head>
+<body>
+ <h1>Custom Form validator</h1>
+ <div class="all">
+    <form id="myForm">
+        <input type="text" id="name" placeholder="Name">
+        <div class="error" id="nameError"></div>
+
+        <input type="email" id="email" placeholder="Email">
+        <div class="error" id="emailError"></div>
+
+        <input type="password" id="password" placeholder="Password (min 6 chars)">
+        <div class="error" id="passwordError"></div>
+
+        <button type="submit">Submit</button>
+        <p class="success" id="successMessage"></p>
+    </form>
+</div>
+    <script>
+        const form = document.getElementById("myForm");
+
+        form.addEventListener("submit", (e) => {
+            let isValid = true;
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            document.getElementById("nameError").textContent = name ? "" : "Name is required.";
+            document.getElementById("emailError").textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? "" : "Invalid email.";
+            document.getElementById("passwordError").textContent = password.length >= 6 ? "" : "Password must be at least 6 characters.";
+
+            if (!name || !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) || password.length < 6) {
+                e.preventDefault();
+                isValid = false;
+            }
+
+            if (isValid) {
+                document.getElementById("successMessage").textContent = "Form submitted successfully!";
+            }
+        });
+    </script>
+
+</body>
+</html>

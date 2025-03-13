@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Section</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .faq-item { margin-bottom: 10px; }
+        .answer { display: none; padding: 5px; border-left: 3px solid blue; }
+        .active .answer { display: block; }
+        .question { cursor: pointer; background: #f4f4f4; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h2>OYSCATECH FAQ Section</h2>
+    <div class="faq-item">
+        <div class="question">Where is OYSCATECH located?</div>
+        <div class="answer">Oyscatech is located at Igboora Oyo state</div>
+    </div>
+    <div class="faq-item">
+        <div class="question">do they offer computer science as a couse in OYSCATECH</div>
+        <div class="answer">Yes absolutely they do including other scienc related course.</div>
+    </div>
+    <div class="faq-item">
+        <div class="question">Is OYSCECH a polytechnic</div>
+        <div class="answer">Yes it is</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.body.addEventListener("click", function (event) {
+                if (event.target.classList.contains("question")) {
+                    document.querySelectorAll(".faq-item").forEach(item => item.classList.remove("active"));
+                    event.target.parentElement.classList.toggle("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

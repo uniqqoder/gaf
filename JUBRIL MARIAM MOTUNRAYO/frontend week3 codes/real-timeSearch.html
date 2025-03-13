@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Search Filter</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        input { width: 200px; padding: 5px; margin-bottom: 10px; }
+        .hidden { display: none; }
+        .all{
+            border: 1px solid red;
+            width:50%;
+            margin:50px auto;
+            padding:30px;
+        }
+        p{
+            text-align: center;
+            font-size:30px;
+        }
+    </style>
+    
+</head>
+<body>
+    <p>Result for department search</p>
+<div class="all">
+    <input type="text" id="search" placeholder="Search department...">
+    <button onclick="resetSearch()">Reset</button>
+    <ul id="item-list">
+        <li>SLT</li>
+        <li>COM-SCIENCE</li>
+        <li>BAM</li>
+        <li>PAD</li>
+        <li>STATISTICS</li>
+        <li>LIS</li>
+        <li>AGT</li>
+    </ul>
+</div>
+    <script>
+        const searchInput = document.getElementById("search");
+        const items = document.querySelectorAll("#item-list li");
+
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase();
+            items.forEach(item => {
+                item.style.display = item.textContent.toLowerCase().includes(query) ? "block" : "none";
+            });
+        });
+
+        function resetSearch() {
+            searchInput.value = "";
+            items.forEach(item => item.style.display = "block");
+        }
+    </script>
+
+</body>
+</html>

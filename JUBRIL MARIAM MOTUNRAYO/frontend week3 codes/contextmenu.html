@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Context Menu</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #context-menu {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+        #context-menu ul {
+            list-style: none;
+            padding: 10px;
+            margin: 0;
+        }
+        #context-menu ul li {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        #context-menu ul li:hover {
+            background: #f0f0f0;
+        }
+        p{
+            font-size: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="context-menu">
+        <ul>
+            <li onclick="changeBackground()">Change Background Color</li>
+            <li onclick="copyText()">Copy Text</li>
+            <li onclick="showTime()">Show Current Time</li>
+        </ul>
+    </div>
+
+    <p id="text">Right-click anywhere to see the custom context menu.</p>
+
+    <script>
+        const contextMenu = document.getElementById("context-menu");
+        document.addEventListener("contextmenu", (event) => {
+            event.preventDefault();
+            contextMenu.style.display = "block";
+            contextMenu.style.left = `${event.pageX}px`;
+            contextMenu.style.top = `${event.pageY}px`;
+        });
+
+        document.addEventListener("click", () => {
+            contextMenu.style.display = "none";
+        });
+
+        function changeBackground() {
+            document.body.style.backgroundColor = `hsl(${Math.random() * 360}, 50%, 60%)`;
+        }
+
+        function copyText() {
+            navigator.clipboard.writeText(document.getElementById("text").textContent);
+            alert("Text copied!");
+        }
+
+        function showTime() {
+            alert(`Current Time: ${new Date().toLocaleTimeString()}`);
+        }
+    </script>
+
+</body>
+</html>

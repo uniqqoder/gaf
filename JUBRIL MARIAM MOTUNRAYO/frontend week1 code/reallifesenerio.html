@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    
+</style>
+<body>
+   
+    <h2> focus on the search bar using DOM(Id) Selector</h2>
+        <input type="text" id="search">
+        <button>seach</button>
+        
+        <h1 class="thename"></h1>
+        <h1 class="disp"></h1>
+</body>
+<script>
+    let searchBar = document.getElementById("search");
+searchBar.focus()
+
+let alerts = document.getElementsByClassName("thename");
+alerts[0].innerHTML = "display for DOM (className) Welcome";
+
+let  mydisplay = document.querySelector(".disp").innerHTML = "this is display using   DOM (querySelector) "
+
+</script>
+</html>

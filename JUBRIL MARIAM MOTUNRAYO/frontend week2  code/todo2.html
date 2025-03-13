@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        button {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter a task">
+    <button id="addTaskBtn">Add Task</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", loadTasks);
+
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
+
+// Add new task
+addTaskBtn.addEventListener("click", () => {
+    const taskText = taskInput.value.trim();
+    if (taskText !== "") {
+        addTask(taskText);
+        saveTask(taskText);
+        taskInput.value = ""; // Clear input
+    }
+});
+
+// Event delegation for marking complete or deleting
+taskList.addEventListener("click", (e) => {
+    if (e.target.classList.contains("delete")) {
+        deleteTask(e.target.parentElement);
+    } else if (e.target.classList.contains("complete")) {
+        toggleComplete(e.target.parentElement);
+    }
+});
+
+// Load tasks from localStorage
+function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach(task => addTask(task.text, task.completed));
+}
+
+// Add task to the DOM
+function addTask(text, completed = false) {
+    const li = document.createElement("li");
+    if (completed) li.classList.add("completed");
+    
+    li.innerHTML = `
+        <span>${text}</span>
+        <button class="complete">✔</button>
+        <button class="delete">✖</button>
+    `;
+    taskList.appendChild(li);
+}
+
+// Save task to localStorage
+function saveTask(text) {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.push({ text, completed: false });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// Toggle task completion
+function toggleComplete(taskElement) {
+    taskElement.classList.toggle("completed");
+    
+    const tasks = JSON.parse(localStorage.getItem("tasks"));
+    const taskText = taskElement.querySelector("span").textContent;
+    const updatedTasks = tasks.map(task => 
+        task.text === taskText ? { ...task, completed: !task.completed } : task
+    );
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+}
+
+// Delete task from UI and localStorage
+function deleteTask(taskElement) {
+    const taskText = taskElement.querySelector("span").textContent;
+    taskElement.remove();
+    
+    const tasks = JSON.parse(localStorage.getItem("tasks"));
+    const updatedTasks = tasks.filter(task => task.text !== taskText);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+}
+
+
+    </script>
+
+</body>
+</html>

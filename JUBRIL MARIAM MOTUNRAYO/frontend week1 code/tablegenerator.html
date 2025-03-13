@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table Generator</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        td, th { border: 1px solid black; padding: 10px; text-align: center; }
+        .highlight { background-color: yellow; }
+        form{text-align: center;border:1px solid;padding:10px 20px;margin:30px auto;width:50%;}
+        h1{text-align: center;}
+        input{margin:20px 5px;}
+    </style>
+</head>
+<body>
+    <h1> Dynamic Table Generator</h1>
+    <form id="tableForm">
+        Input Number of Rows: <input type="number" id="rows" min="1"><br>
+        Input number of Columns: <input type="number" id="cols" min="1"><br>
+        <button type="button" onclick="generateTable()">Generate Table</button>
+    </form>
+
+    <div id="tableContainer"></div>
+
+    <script>
+        function generateTable() {
+            let rowCount = document.getElementById("rows").value;
+            let colCount = document.getElementById("cols").value;
+            let container = document.getElementById("tableContainer");
+
+            // Clear existing table
+            container.innerHTML = "";
+
+            // Create table element
+            let table = document.createElement("table");
+
+            for (let i = 0; i < rowCount; i++) {
+                let row = document.createElement("tr");
+
+                for (let j = 0; j < colCount; j++) {
+                    let cell = document.createElement("td");
+                    cell.textContent = `row ${i + 1}, column ${j + 1}`;
+                    row.appendChild(cell);
+                }
+
+                // Add event listener to highlight row on click
+                row.addEventListener("click", function () {
+                    document.querySelectorAll("tr").forEach(r => r.classList.remove("highlight"));
+                    row.classList.add("highlight");
+                });
+
+                table.appendChild(row);
+            }
+
+            container.appendChild(table);
+        }
+    </script>
+</body>
+</html>

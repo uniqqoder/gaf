@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #timer { font-size: 2em; }
+        button { margin: 5px; padding: 10px; }
+        ul { list-style: none; padding: 0; }
+        .content{width:50%;border:4px solid;margin:20px auto;height:60vh;display:flex;justify-content:center;align-items:center; border-radius:50%;}
+    </style>
+</head>
+<body>
+    <h1>STOPWATCH</h1>
+   <div class="content">
+    <div class="in">
+    <div id="timer">00:00:00</div>
+    <button onclick="startStopwatch()">Start</button>
+    <button onclick="pauseStopwatch()">Pause</button>
+    <button onclick="resetStopwatch()">Reset</button>
+    <button onclick="lapTime()">Lap</button>
+</div>
+    <ul id="laps"></ul>
+</div>
+    <script>
+        let timer;
+        let elapsedTime = 0;
+        let running = false;
+
+        function updateTime() {
+            elapsedTime++;
+            let hours = Math.floor(elapsedTime / 3600);
+            let minutes = Math.floor((elapsedTime % 3600) / 60);
+            let seconds = elapsedTime % 60;
+            document.getElementById("timer").textContent = 
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function startStopwatch() {
+            if (!running) {
+                timer = setInterval(updateTime, 1000);
+                running = true;
+            }
+        }
+
+        function pauseStopwatch() {
+            clearInterval(timer);
+            running = false;
+        }
+
+        function resetStopwatch() {
+            clearInterval(timer);
+            elapsedTime = 0;
+            document.getElementById("timer").textContent = "00:00:00";
+            document.getElementById("laps").innerHTML = "";
+            running = false;
+        }
+
+        function lapTime() {
+            let lap = document.createElement("li");
+            lap.textContent = document.getElementById("timer").textContent;
+            document.getElementById("laps").appendChild(lap);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop Task Organizer</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { display: flex; gap: 20px; }
+        .category {
+            width: 200px; padding: 10px;
+            border: 2px dashed #ccc; min-height: 150px;
+        }
+        .task {
+            padding: 10px; margin: 5px;
+            background: lightblue; cursor: grab;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="category" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>To-Do</h3>
+            <div class="task" draggable="true" ondragstart="drag(event)" id="task1">Task 1</div>
+            <div class="task" draggable="true" ondragstart="drag(event)" id="task2">Task 2</div>
+        </div>
+
+        <div class="category" id="inprogress" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>In Progress</h3>
+        </div>
+
+        <div class="category" id="completed" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h3>Completed</h3>
+        </div>
+    </div>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            const taskId = event.dataTransfer.getData("text");
+            const task = document.getElementById(taskId);
+            event.target.appendChild(task);
+            saveTasks();
+        }
+
+        function saveTasks() {
+            const categories = document.querySelectorAll(".category");
+            const data = {};
+            categories.forEach(category => {
+                data[category.id] = [...category.children].map(task => task.id);
+            });
+            localStorage.setItem("tasks", JSON.stringify(data));
+        }
+    </script>
+
+</body>
+</html>
