@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .contain{
+            /* background-color:yellow; */
+            overflow:hidden;
+            height:100vh;
+            
+        }
+        .mydiv{
+            width:80%;
+            height:80vh;
+            margin:3% auto;
+            background:darkblue;
+            display:flex;
+            border-radius:25px;
+            overflow:hidden;
+            box-shadow: 0 0 10px 6px violet;
+        }
+        .inner{
+            width:50%;
+
+        }
+        .in1{
+            background-color:white;
+            border-top-left-radius:25px;
+            padding:7px;
+
+        }
+        .in1 h1{
+            font-family:cursive;
+        }
+        .in1 h2{
+            font-size:50px;
+            padding-left:7px;
+            margin-bottom: 0px;
+            text-align: left;
+
+        }
+        .welcome{
+            padding-left:7px;
+            margin-top:1px;
+            text-align: left;
+        }
+        .in2{
+            background-image:linear-gradient(45deg,blueviolet,black,blueviolet);
+            border-top-right-radius:25px;
+            padding:10px 20px;
+
+
+        }
+        .in2p{
+            color:white;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            font-size:12px;
+            text-align: right;
+        }
+        .in2p span{
+            border:1px solid white;
+            padding:12px 15px;
+            border-radius:100px;
+        }
+        .imgdiv{
+            width:40%;
+            height:80vh;
+            position:fixed;
+            top: 50%;
+            left:75.6%;
+            transform:translate(-50%,-50%);
+            /* background-color:green; */
+            z-index:2;
+            opacity:0;
+            background-image:linear-gradient(rgba(225,0,0,0),rgba(0,0,225,0)),url('images/real\ image\ processsing.png');
+            background-size:100% 120%;
+            transition:1s;
+            
+        }
+        /* below is the css code i use to do opacity before now*/
+        /* .contain:hover .imgdiv{
+            opacity:1;
+        } */
+        .content{
+            background-color:whtie;
+            width:70%;
+            margin:auto;
+            text-align: center;
+            height:63%;
+        }
+        .pnumber{
+            background:white;
+            border:1px solid black;
+            width: 90%;
+            padding:6px 6px;
+            font-size:12px;
+
+        }
+        input[type='text']{
+            width: 90%;
+            margin-top:10px;
+            padding:6px 6px;
+            font-size:12px;
+            border-radius:5px;
+            outline:none;
+
+        }
+        .thelink{
+            margin: 10px 0;
+            font-size:10px;
+            text-align: right;
+        }
+        .login{
+            width:94%;
+            padding:10px 6px;
+            border-radius:100px;
+            background:black;
+            color:white;
+            border:none;
+
+        }
+        .discover{
+          margin-top: 48%;
+          color:white;
+          font-family:Verdana, Geneva, Tahoma, sans-serif;
+          font-size:20px;
+          width:75%;
+        }
+        .under{
+            color:white;
+            font-size:10px;
+          font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+        }
+    </style>
+</head>
+ 
+<body>
+    <div class="contain">
+    <div class="mydiv">
+        <div class="inner in1">
+            <h1>KARC</h1>
+            <div class="content">
+            <h2>Hello!</h2>
+            <p class="welcome">Welcome back to the community</p>
+            <button class="pnumber"> Login with your Phone number</button>
+            <p class="or">Or</p>
+            <input type="text" placeholder="username" id="uname" onmouseenter="showme()" onfocus="showme()" onmouseleave ='unshowme()'>
+            <br>
+            <input type="text" placeholder="password" id="pword" onmouseenter="showme()" onfocus="showme()" onmouseleave ='unshowme()'>
+            <p class="thelink"><a href="javaScript:void(0);">forgort password?</a></p>
+            <button class="login">Log in</button>
+            <p>don't have an account <span><a href="">sign-up</a></span></p>
+        </div>
+        </div>
+        <div class="inner in2">
+          <p class="in2p">Sign Up <span>join Us</span></p>
+          <p class="discover">Discover the hidden gem of the world, one step at a time</p>
+          <p class="under">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, voluptatum? Sint, suscipit corrupti culpa eveniet ipsa adipisci voluptatem reprehenderit? Qui officia aspernatu this is the down part.</p>
+
+      </div>
+    </div>
+    <div class="imgdiv">
+
+    </div>
+</div>
+    <!-- <img src="images/real image processsing.png" width='300px' height='' alt=""> -->
+</body>
+<script>
+    let myimg = document.querySelector('.imgdiv');
+    let no = document.getElementbyId("myid")
+
+    function showme(){
+          myimg.style.opacity= 1;
+    }
+    function unshowme(){
+        myimg.style.opacity= 0;
+
+      
+    }
+</script>
+</html>
